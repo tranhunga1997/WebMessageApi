@@ -22,11 +22,10 @@ public class ChatsService {
     public List<ChatsEntity> getMsgList(MsgList msgList){
         if(msgList.getTimeEnd() == null || msgList.getTimeStart() == null){
             return chatsRepository.findById1AndId2(msgList.getId1(), msgList.getId2());
-        }else {
+        }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime timeStart = LocalDateTime.parse(msgList.getTimeStart(), formatter);
             LocalDateTime timeEnd = LocalDateTime.parse(msgList.getTimeEnd(), formatter);
             return chatsRepository.findById1AndId2AndDatetimeBetween(msgList.getId1(), msgList.getId2(), timeStart, timeEnd);
-        }
     }
 }
